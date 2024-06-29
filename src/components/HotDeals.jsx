@@ -2,36 +2,50 @@ import React from 'react';
 
 // Reusable StarRating component
 const StarRating = ({ rating }) => {
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating % 1 !== 0;
-  
-  // Function to generate star SVG
-  const generateStars = (count) => {
+  const fullStars = Math.floor(rating); // Full stars based on integer part
+  const remainder = rating % 1; // Remainder for half star
+
+  // Function to generate star SVGs
+  const generateStars = (count, isFilled, isHalfFilled) => {
     const stars = [];
     for (let i = 0; i < count; i++) {
       stars.push(
-        <svg key={i} className="h-4 w-4 fill-current text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-          <path d="M10 1l2.6 6.8H19l-5 4.2 1.8 7-5.8-4.4L5.8 18l1.8-7L2 7.8h6.4L10 1z"/>
+        <svg key={i} className={`h-4 w-4 ${isFilled ? 'text-yellow-500' : 'text-gray-300'} stroke-current stroke-2`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M10 1l2.6 6.8H19l-5 4.2 1.8 7-5.8-4.4L5.8 18l1.8-7L2 7.8h6.4L10 1z" fill="none"/>
         </svg>
       );
     }
+
+    if (isHalfFilled) {
+      stars.push(
+        <svg key="half" className="h-4 w-4 text-yellow-500  stroke-current stroke-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M10 1l2.6 6.8H19l-5 4.2 1.8 7-5.8-4.4L5.8 18l1.8-7L2 7.8h6.4L10 1z" fill="none"/>
+        </svg>
+      );
+    }
+
     return stars;
   };
 
   return (
     <div className="flex items-center">
-      {generateStars(fullStars)}
-      {hasHalfStar && (
-        <svg className="h-4 w-4 fill-current text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-          <path d="M10 1l2.6 6.8H19l-5 4.2 1.8 7-5.8-4.4L5.8 18l1.8-7L2 7.8h6.4L10 1z"/>
-        </svg>
-      )}
+      {generateStars(fullStars, true, remainder >= 0.5)} {/* Filled stars and potentially a half-filled star */}
+      {!remainder >= 0.5 && generateStars(5 - fullStars, false, false)} {/* Unfilled stars */}
     </div>
   );
 };
 
 const HotDealsPage = () => {
   const hotDeals = [
+    {
+      image: 'Image (7).png', // Example URL
+      name: 'Chinese Cabbage',
+      price: '$12.00',
+      originalPrice: '$24.00',
+      discount: '50%',
+      rating: 4.5,
+      reviews: '524'
+    },
     {
       image: 'Image (7).png', // Example URL
       name: 'Chinese Cabbage',
