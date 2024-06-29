@@ -68,12 +68,11 @@ const HeroSection = () => {
                         <span className="text-gray-400">30 Days Money-Back Guarantee</span>
                     </div>
                 </div>
+
             </div>
+           
+            </div>
+            );
 
-
-
-        </div>
-    );
-};
-
+        };
 export default HeroSection;

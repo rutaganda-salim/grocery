@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const categories = [
     { name: "Fresh Fruit", image: "/image 1.png" },
@@ -30,6 +30,54 @@ const products = [
 
 const Popular = () => {
     const [clicked, setClicked] = useState(Array(products.length).fill(false));
+    const [timeLeft, setTimeLeft] = useState({
+        days: 0,
+        hours: 2,
+        minutes: 2,
+        seconds: 18
+    });
+
+    useEffect(() => {
+        const countdown = setInterval(() => {
+            if (timeLeft.seconds > 0) {
+                setTimeLeft((prevState) => ({
+                    ...prevState,
+                    seconds: prevState.seconds - 1
+                }));
+            } else {
+                if (timeLeft.minutes > 0) {
+                    setTimeLeft((prevState) => ({
+                        ...prevState,
+                        minutes: prevState.minutes - 1,
+                        seconds: 59
+                    }));
+                } else {
+                    if (timeLeft.hours > 0) {
+                        setTimeLeft((prevState) => ({
+                            ...prevState,
+                            hours: prevState.hours - 1,
+                            minutes: 59,
+                            seconds: 59
+                        }));
+                    } else {
+                        if (timeLeft.days > 0) {
+                            setTimeLeft((prevState) => ({
+                                ...prevState,
+                                days: prevState.days - 1,
+                                hours: 23,
+                                minutes: 59,
+                                seconds: 59
+                            }));
+                        } else {
+                            clearInterval(countdown);
+                        }
+                    }
+                }
+            }
+        }, 1000);
+
+        return () => clearInterval(countdown);
+    }, [timeLeft]);
 
     const handleSvgClick = (index) => {
         const newClicked = [...clicked];
@@ -103,6 +151,55 @@ const Popular = () => {
                         </div>
                     ))}
                 </div>
+                <div className="flex justify-around mt-8 space-x-4">
+                    <div className="rounded-lg p-6 text-center text-white flex flex-col items-center w-80 h-96 relative overflow-hidden">
+                        <img src="/13.png" alt="Vegetables" className="absolute inset-0 w-full h-full object-cover " />
+                        <div className="relative z-10">
+                            <h3 className="font-bold">BEST DEALS</h3>
+                            <h2 className="text-2xl font-bold">Sale of the Month</h2>
+                            <div className="flex space-x-2 mt-2 text-center items-center justify-center">
+                                <span><strong className='text-xl'>{String(timeLeft.days).padStart(2, '0')}</strong> days</span>
+                                <span> : </span>
+                                <span><strong className='text-xl'>{String(timeLeft.hours).padStart(2, '0')}</strong> hours</span>
+                                <span> : </span>
+                                <span><strong className='text-xl'>{String(timeLeft.minutes).padStart(2, '0')}</strong> minutes</span>
+                                <span> : </span>
+                                <span><strong className='text-xl'>{String(timeLeft.seconds).padStart(2, '0')}</strong> seconds</span>
+                            </div>
+                            <div className="mt-4">
+                                <button className="bg-white text-green-500 px-4 py-2 rounded-full">Shop Now →</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="rounded-lg p-6 text-center text-white flex flex-col items-center w-80 h-96 relative overflow-hidden">
+                        <img src="/11.png" alt="Meat" className="absolute inset-0 w-full h-full object-cover " />
+                        <div className="relative z-10">
+                            <h3 className="text-green-500">85% FAT FREE</h3>
+                            <h2 className="text-2xl font-bold">Low-Fat Meat</h2>
+                            <p className="mt-3">Started at <span className="font-bold text-yellow-500">$79.99</span></p>
+                            <div className="mt-10">
+                                <button className="bg-white text-green-500 px-4 py-2 rounded-full">Shop Now →</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="rounded-lg p-6 text-center text-white flex flex-col items-center w-80 h-96 relative overflow-hidden">
+                        <img src="/10 (1).png" alt="Fruits" className="absolute inset-0 w-full h-full object-cover " />
+                        <div className="relative z-10">
+                            <h3 className="text-black">SUMMER SALE</h3>
+                            <h2 className="text-2xl font-bold">100% Fresh Fruit</h2>
+                            <p className="mt-3">Up to <span className="font-bold">
+                                <span className="bg-black text-yellow-500 px-2 py-1 rounded">64% OFF</span>
+                            </span></p>
+                            <div className="mt-10">
+                                <button className="bg-white text-green-500 px-4 py-2 rounded-full">Shop Now →</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </section>
         </div>
     );

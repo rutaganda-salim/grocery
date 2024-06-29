@@ -3,6 +3,8 @@ import Navigation from "./components/Navigation"
 import "./App.css"
 import HeroSection from "./components/Hero"
 import Popular from "./components/popular"
+import HotDealsPage from "./components/HotDeals"
+
 
 
 function App() {
@@ -12,7 +14,8 @@ function App() {
       <Navigation />
       <HeroSection />
       <Popular />
-
+      <HotDealsPage />
+     
     </>
   )
 }
