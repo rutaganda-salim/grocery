@@ -171,8 +171,15 @@ const HotDealsPage = () => {
               }`}
             />
             <div className="p-4">
+              {index === 0 && (
+                <div className="mb-2 flex justify-center">
+                  <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full">
+                    Add to Cart
+                  </button>
+                </div>
+              )}
               <h2 className="text-sm mb-2">{deal.name}</h2>
-              <div className="flex items-center  mb-2">
+              <div className="flex items-center mb-2">
                 <span className="text-green-500 font-bold">{deal.price}</span>
                 {deal.originalPrice && (
                   <span className="text-gray-500 line-through">{deal.originalPrice}</span>
@@ -182,15 +189,8 @@ const HotDealsPage = () => {
                 <StarRating rating={deal.rating} />
                 {deal.reviews && <span className="text-gray-500 ml-2">({deal.reviews})</span>}
               </div>
-              {index === 0 && (
-                <div className="mt-2 flex justify-center">
-                  <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full">
-                    Add to Cart
-                  </button>
-                </div>
-              )}
               {index !== 0 && (
-                <div className="absolute bottom-10 right-4">
+                <div className="absolute right-2 bottom-10 transform ">
                   <div
                     onClick={() => handleSvgClick(index)}
                     className={`rounded-full p-2 cursor-pointer transition duration-300 ${
