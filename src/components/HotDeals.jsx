@@ -195,6 +195,7 @@ const HotDealsPage = () => {
   ];
 
   return (
+    <section className='bg-gray-100'>
     <div className="container mx-auto px-4 md:px-0 py-8 max-w-screen-lg">
       <h1 className="text-2xl font-bold mb-4">Hot Deals</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
@@ -270,6 +271,7 @@ const HotDealsPage = () => {
         ))}
       </div>
     </div>
+  </section>
   );
 };
 
