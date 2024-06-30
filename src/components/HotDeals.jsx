@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Reusable StarRating component
 const StarRating = ({ rating }) => {
@@ -40,6 +40,58 @@ const StarRating = ({ rating }) => {
     <div className="flex items-center space-x-1">
       {generateStars(fullStars, true, remainder >= 0.5)}
       {!remainder >= 0.5 && generateStars(5 - fullStars, false, false)}
+    </div>
+  );
+};
+
+const CountdownTimer = ({ targetDate }) => {
+  const calculateTimeLeft = () => {
+    const difference = targetDate - new Date();
+    let timeLeft = {};
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+
+    return timeLeft;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="text-center mt-4">
+      <div className="text-lg font-semibold">Hurry up! Offer ends in:</div>
+      <div className="flex justify-center space-x-2">
+        <div className="flex flex-col items-center">
+          <span className="text-2xl">{timeLeft.days || '00'} : </span>
+          <span className="text-sm">DAYS</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <span className="text-2xl">{timeLeft.hours || '00'} : </span>
+          <span className="text-sm">HOURS</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <span className="text-2xl">{timeLeft.minutes || '00'} : </span>
+          <span className="text-sm">MINS</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <span className="text-2xl">{timeLeft.seconds || '00'}</span>
+          <span className="text-sm">SECS</span>
+        </div>
+      </div>
     </div>
   );
 };
@@ -145,13 +197,12 @@ const HotDealsPage = () => {
   return (
     <div className="container mx-auto px-4 md:px-0 py-8 max-w-screen-lg">
       <h1 className="text-2xl font-bold mb-4">Hot Deals</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
         {hotDeals.map((deal, index) => (
           <div
             key={index}
-            className={`relative bg-white shadow-md rounded-md overflow-hidden ${
-              index === 0 ? 'col-span-2 row-span-2' : ''
-            }`}
+            className={`relative bg-white shadow-md rounded-md overflow-hidden transition duration-300 cursor-pointer border border-transparent hover:border-green-500 ${index === 0 ? 'col-span-2 row-span-2' : ''
+              }`}
           >
             {deal.discount && (
               <div className="absolute top-4 left-2 bg-red-500 text-white text-xs font-bold py-1 px-2 rounded">
@@ -166,26 +217,18 @@ const HotDealsPage = () => {
             <img
               src={deal.image}
               alt={deal.name}
-              className={`w-full ${
-                index === 0 ? 'h-48 sm:h-64 md:h-96 lg:h-128 object-cover' : 'h-60 object-cover'
-              }`}
+              className={`w-full ${index === 0 ? 'h-48 sm:h-64 md:h-96 lg:h-128 object-cover' : 'h-60 object-cover'
+                }`}
             />
-            <div className="p-4">
-              {index === 0 && (
-                <div className="mb-2 flex justify-center">
-                  <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full">
-                    Add to Cart
-                  </button>
-                </div>
-              )}
+            <div className={`p-4 ${index === 0 ? 'text-center' : ''}`}>
               <h2 className="text-sm mb-2">{deal.name}</h2>
-              <div className="flex items-center mb-2">
-                <span className="text-green-500 font-bold">{deal.price}</span>
+              <div className={`flex items-center mb-2 ${index === 0 ? 'justify-center' : ''}`}>
+                <span className={`text-green-500 font-bold ${index === 0 ? 'text-center' : ''}`}>{deal.price}</span>
                 {deal.originalPrice && (
-                  <span className="text-gray-500 line-through">{deal.originalPrice}</span>
+                  <span className={`text-gray-500 line-through ml-2 ${index === 0 ? 'text-center' : ''}`}>{deal.originalPrice}</span>
                 )}
               </div>
-              <div className="flex items-center mb-2">
+              <div className={`flex items-center mb-2 ${index === 0 ? 'justify-center' : ''}`}>
                 <StarRating rating={deal.rating} />
                 {deal.reviews && <span className="text-gray-500 ml-2">({deal.reviews})</span>}
               </div>
@@ -193,9 +236,8 @@ const HotDealsPage = () => {
                 <div className="absolute right-2 bottom-10 transform ">
                   <div
                     onClick={() => handleSvgClick(index)}
-                    className={`rounded-full p-2 cursor-pointer transition duration-300 ${
-                      clicked[index] ? 'bg-[#00B207]' : 'bg-gray-100'
-                    } border-1`}
+                    className={`rounded-full p-2 cursor-pointer transition duration-300 ${clicked[index] ? 'bg-[#00B207]' : 'bg-gray-100'
+                      } border-1 hover:border-[#00B207]`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -212,6 +254,16 @@ const HotDealsPage = () => {
                     </svg>
                   </div>
                 </div>
+              )}
+              {index === 0 && (
+                <>
+                  <div className="mb-2 flex justify-center">
+                    <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full">
+                      Add to Cart
+                    </button>
+                  </div>
+                  <CountdownTimer targetDate={new Date('2024-07-01T00:00:00')} />
+                </>
               )}
             </div>
           </div>
