@@ -263,7 +263,7 @@ const HotDealsPage = () => {
                       Add to Cart
                     </button>
                   </div>
-                  <CountdownTimer targetDate={new Date('2024-07-01T00:00:00')} />
+                  <CountdownTimer targetDate={new Date('2024-07-03T10:03:30')} />
                 </>
               )}
             </div>
