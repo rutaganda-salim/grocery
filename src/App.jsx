@@ -6,6 +6,8 @@ import Popular from "./components/popular"
 import HotDealsPage from "./components/HotDeals"
 import SummerSaleBanner from "./components/SummerBanner"
 import ClientTestimonials from "./components/ClientsTestimonials"
+import InstagramSection from "./components/InstagramSection"
+import Footer from "./components/Footer"
 
 
 
@@ -19,6 +21,8 @@ function App() {
       <HotDealsPage />
       <SummerSaleBanner />
       <ClientTestimonials />
+      <InstagramSection />
+      <Footer />
      
     </>
   )
