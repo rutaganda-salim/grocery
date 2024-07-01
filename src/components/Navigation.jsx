@@ -1,16 +1,15 @@
 import React from "react";
-import { MapPinIcon, HeartIcon, ShoppingBagIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { PhoneIcon } from '@heroicons/react/24/outline';
+import { MapPinIcon, HeartIcon, ShoppingBagIcon, MagnifyingGlassIcon, PhoneIcon } from '@heroicons/react/24/outline';
 
 const Navigation = () => {
     return (
-        <div className="w-full">
+        <div className="w-full bg-white shadow-md">
             <div className="border-b border-gray-300">
                 <div className="max-w-screen-lg mx-auto px-4 py-2">
-                    <div className="flex items-center justify-between pb-2">
+                    <div className="flex flex-col md:flex-row items-center justify-between pb-2 space-y-2 md:space-y-0">
                         <div className="flex items-center space-x-2">
                             <MapPinIcon className="w-6 h-10 text-gray-500" />
-                            <span className="text-gray-600">
+                            <span className="text-gray-600 text-center md:text-left">
                                 State Location: Kigali- 344, Nyarugenge, Nyakabanda, Rwanda
                             </span>
                         </div>
@@ -33,12 +32,12 @@ const Navigation = () => {
                     </div>
                 </div>
             </div>
-            <div className="max-w-screen-lg mx-auto px-4 py-4 flex items-center justify-between">
+            <div className="max-w-screen-lg mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
                 <div className="flex items-center space-x-2">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Leaf_icon_03.svg" alt="Logo" className="w-8 h-8" />
                     <span className="font-bold text-3xl">Ecobazar</span>
                 </div>
-                <div className="flex-1 px-4">
+                <div className="flex-1 w-full md:px-4">
                     <div className="flex items-center border rounded-lg">
                         <MagnifyingGlassIcon className="w-5 h-5 mx-2" />
                         <input
@@ -63,7 +62,7 @@ const Navigation = () => {
                     </div>
                 </div>
             </div>
-            <div className="bg-black text-white flex justify-between items-center px-4 py-2 border-b-2 h-16">
+            <div className="bg-black text-white flex flex-col md:flex-row justify-between items-center px-4 py-2 border-b-2 h-16 space-y-2 md:space-y-0">
                 <div className="flex space-x-6 text-sm text-gray-400">
                     <a href="#" className="hover:text-white">Home</a>
                     <a href="#" className="hover:text-white">Shop</a>

@@ -34,10 +34,10 @@ const FeaturedProducts = () => {
       <h2 className="text-2xl font-bold mb-4">Featured Products</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product, index) => (
-          <div key={index} className="bg-white shadow-md rounded-md overflow-hidden">
+          <div key={index} className="bg-white shadow-md rounded-md overflow-hidden border transition duration-300 ease-in-out transform hover:border-green-500 cursor-pointer ">
             {product.discount && (
               <div className="absolute top-4 left-2 bg-red-500 text-white text-xs font-bold py-1 px-2 rounded">
-               
+                {product.discount}
               </div>
             )}
             <img src={product.image} alt={product.name} className="w-full h-60 object-cover" />
@@ -49,8 +49,8 @@ const FeaturedProducts = () => {
               </div>
               <div className="flex items-center mt-2">
                 <span className="text-yellow-500">{Array(Math.floor(product.rating)).fill('★').join('')}</span>
-                
               </div>
+              
             </div>
           </div>
         ))}

@@ -124,7 +124,7 @@ const HotDealsPage = () => {
       rating: 5,
     },
     {
-      image: 'Image (4).png',
+      image: 'y.png',
       name: 'Green Lettuce',
       price: '$9.00',
       rating: 4.0,

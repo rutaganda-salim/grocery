@@ -2,7 +2,7 @@ import React from 'react';
 
 const HeroSection = () => {
     return (
-        <div className="max-w-screen-lg mx-auto py-8 px-4">
+        <div className="max-w-screen-lg mx-auto py-8 px-4 pt-10">
             <div className="flex space-x-4">
                 <div className="bg-green-500 rounded-lg flex-1 p-6 relative overflow-hidden w-full h-96">
                     <img src="/bannar.png" alt="Fresh food" className="absolute inset-0 w-full h-full object-cover" />
@@ -15,7 +15,6 @@ const HeroSection = () => {
                 </div>
 
                 <div className="flex flex-col space-y-4">
-
                     <div className="bg-gray-100 rounded-lg p-4 flex-1 relative overflow-hidden w-72">
                         <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/BG (1).png')" }}></div>
                         <div className="relative z-10">
@@ -68,11 +67,9 @@ const HeroSection = () => {
                         <span className="text-gray-400">30 Days Money-Back Guarantee</span>
                     </div>
                 </div>
-
             </div>
-           
-            </div>
-            );
+        </div>
+    );
+};
 
-        };
 export default HeroSection;
