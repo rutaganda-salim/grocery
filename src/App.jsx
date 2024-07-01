@@ -4,6 +4,8 @@ import "./App.css"
 import HeroSection from "./components/Hero"
 import Popular from "./components/popular"
 import HotDealsPage from "./components/HotDeals"
+import SummerSaleBanner from "./components/SummerBanner"
+import ClientTestimonials from "./components/ClientsTestimonials"
 
 
 
@@ -15,6 +17,8 @@ function App() {
       <HeroSection />
       <Popular />
       <HotDealsPage />
+      <SummerSaleBanner />
+      <ClientTestimonials />
      
     </>
   )
